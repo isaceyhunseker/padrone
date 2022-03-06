@@ -1,0 +1,145 @@
+﻿Modulun main functionunun adi <module_name>_main formatinda olmali.
+
+PX4’u boarda gomme ornegi : Pixhawk v3: make px4_fmu-v4_default upload
+
+projede kullanilacak mesaj tipleri bu linkte https://github.com/PX4/Firmware/tree/master/msg
+
+
+
+18 Ocak Cumartesi
+
+https://github.com/szebedy/autonomous-drone/commits/master?after=ca7e70eaf4df70cd7c112b02e6c4371a4378dce9+104
+
+bu linkte ‘Simulated drone approaches visual marker’ commiti incelendi
+[https://github.com/szebedy/autonomous-drone/tree/01845c478441833efc8ccbbf689e5453f57c082c/src]
+
+bu commit asagidaki terminal komutlari ile test edildi ve calisti
+
+1. roscore
+
+2. roslaunch mavros px4.launch fcu_url:="udp://:14540@127.0.0.1:14540"
+
+src/Firmware
+
+3. make posix_sitl_default gazebo(Bu olmayada bilir)
+
+no_sim=1 make px4_sitl_default gazebo
+
+4. source Tools/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
+
+roslaunch gazebo_ros empty_world.launch world_name:=$(pwd)/Tools/sitl_gazebo/worlds/iris.world
+
+catkin_ws
+
+5. source ./devel/setup.bash 
+
+rosrun ex1 takeoff_n_land 
+
+
+
+(https://dev.px4.io/master/en/concept/architecture.html) bu makale kurcalandi
+
+To do list
+(https://arxiv.org/pdf/1809.08022.pdf) bu makale okuncak
+(https://dev.px4.io/master/en/concept/flight_modes.html) bu makale okunacak
+
+
+
+
+19 Ocak Pazar
+
+Position controller → Firmware/src/lib/FlightTask
+
+Flight task yazilirken setpoint ve constraint yazilir. Video: 7:30
+
+tek zamanda sadece bir tane flight task calisabilir
+
+flight task, flight tasks’in inheritance’i.
+
+Flighttasks ve flighttask metodlari incelenmeli.
+Update→ taski degistirme
+activate→ taski baslatma
+
+1. method: flighttask ekleme mantigi ss alindi. Video: 17:30 
+
+yeni yazacagimiz flight task diger flight tasklerin inheritance’i olcak.
+
+2.Method : Flight task ornegi : video: 21:10 (Burasi Cokomelli)
+
+Update method genelde true donuyo, false dondugu taski yapamayacagi anlamina geliyor ve safe e geciriyoruz.(Position controller→ update)
+
+
+
+
+24 Ocak Cuma
+
+H. Lim, J. Park, D. Lee, and H. J. Kim, “Build your own quadro-
+tor: Open-source projects on unmanned aerial vehicles,” Robotics &
+Automation Magazine, IEEE, vol. 19, no. 3, pp. 33–45, 2012.
+
+
+A. S. Huang, E. Olson, and D. C. Moore, “LCM: Lightweight
+communications and marshalling,” in Intelligent robots and systems
+(IROS), 2010 IEEE/RSJ international conference on. IEEE, 2010.
+
+L. Meier, P. Tanskanen, L. Heng, G. H. Lee, F. Fraundorfer, and
+M. Pollefeys, “PIXHAWK: A micro aerial vehicle design for au-
+tonomous flight using onboard computer vision,” Autonomous Robots,
+vol. 33, no. 1-2, pp. 21–39, 2012.
+
+
+
+
+07140074 => Controller Timing Requirements ( Bu kisim frekans ayarlamalarinda yardimci olacaktir)
+
+micro object request broker (μORB) => Iletisimi bu kisim sagliyor
+
+
+The devicebdrivers and operating system are modeled after the POSIX [15] interface standards. => [Road vehicles – Controller area network (CAN) – Part 1: Data link
+layer and physical signalling, ISO Std. ISO 11 898-1, 2003.]
+
+
+The off-board communication is using the commonly used MAVLink protocol [16].
+
+The onboard networking is following the UAVCAN standard proposal [17].
+
+ROS
+
+A. S. Huang, A. Bachrach, P. Henry, M. Krainin, D. Maturana, D. Fox,
+and N. Roy, “Visual odometry and mapping for autonomous flight
+using an rgb-d camera,” in International Symposium on Robotics
+Research (ISRR), 2011, pp. 1–16.
+
+
+M. Achtelik, S. Weiss, and R. Siegwart, “Onboard IMU and monocular
+vision based control for MAVs in unknown in-and outdoor environ-
+ments,” in Robotics and automation (ICRA), 2011 IEEE international
+conference on. IEEE, 2011, pp. 3056–3063.
+
+
+
+SLAM => simultaneous localization and mapping
+
+
+
+25 Ocak Cumartesi
+
+Mavlink kumanda haberlesmesi icin
+
+
+algorith klasorune ex1 dosyasi yuklendi. Ornek bir otonom proje. Cpp dosyasina commentler yazildi.
+
+Dokumanlar klasorune “D1_Introduction_MAVROS_Opensource_Quadrotor” dosyasi eklendi. Px4-ROS mantigi anlatiliyor.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
